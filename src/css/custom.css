@@ -1,0 +1,11 @@
+.AI_chatLeftIndication_Icon {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+}
+
+.AI_chatRightIndication_Icon {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
