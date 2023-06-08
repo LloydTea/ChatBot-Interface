@@ -82,9 +82,11 @@ submitBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", activateStep2);
 
 let startUp = new bootstrap.Modal(document.getElementById("myModal"));
-if (localStorage.getItem("sessionKey")) {
-  startUp.show();
-}
+startUp.show();
+
+// if (localStorage.getItem("sessionKey")) {
+//   startUp.show();
+// }
 
 const generateToken = () => {
   axios
