@@ -48,9 +48,15 @@ const activateStep1 = () => {
   nextBtn.addEventListener("click", activateStep2);
 };
 
+let startUp = new bootstrap.Modal(document.getElementById("injuryForm"));
+let loading = new bootstrap.Modal(document.getElementById("loading"));
+startUp.show();
+
 submitBtn.addEventListener("click", () => {
   if (injurytype.value && injuryprocess.value && postinjury.value) {
     setpTwoError.classList.add("d-none");
+    startUp.hide();
+    loading.show();
     const data = {
       name: name.value,
       email: email.value,
@@ -61,7 +67,7 @@ submitBtn.addEventListener("click", () => {
     };
     try {
       axios
-        .post(`${config.BASEURl}:${config.PORT}/report`, data, {
+        .post(`${config.BASEURL}:${config.PORT}/report`, data, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -79,10 +85,8 @@ submitBtn.addEventListener("click", () => {
     setpTwoError.innerHTML = `<i class="bi bi-exclamation-triangle"></i> Please enter details about your injury`;
   }
 });
-nextBtn.addEventListener("click", activateStep2);
 
-let startUp = new bootstrap.Modal(document.getElementById("myModal"));
-startUp.show();
+nextBtn.addEventListener("click", activateStep2);
 
 // if (localStorage.getItem("sessionKey")) {
 //   startUp.show();
@@ -150,6 +154,7 @@ const userMessage = (msg) => {
 };
 
 const AiMessage = (msg) => {
+  loading.hide();
   chatBox.innerHTML += `
     <div class="row justify-content-start">
         <div class="col-9 position-relative">
