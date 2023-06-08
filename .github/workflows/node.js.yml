@@ -5,11 +5,10 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "development" ]
+    branches: ["development"]
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     strategy:
@@ -18,26 +17,27 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - name: Create config.js file
-      run: |
-        # Assign the values to variables
-        baseurl="${{ secrets.BASEURL }}"
-        port="${{ secrets.PORT }}"
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Create config.js file
+        run: |
+          # Assign the values to variables
+          baseurl="${{ secrets.BASEURL }}"
+          port="${{ secrets.PORT }}"
 
-        # Create the config.js file
-        cat <<EOF >config.js
-        module.exports = {
-          BASEURL: "${baseurl}",
-          PORT: "${port}",
-          DEBUG_MODE: true,
-        };
-        EOF
-        echo "config.js file created successfully."
+          # Create the config.js file
+          cat <<EOF >config.js
+          module.exports = {
+            BASEURL: "${baseurl}",
+            PORT: "${port}",
+            DEBUG_MODE: true,
+          };
+          EOF
+          echo "config.js file created successfully."
+      - run: npx webpack --config webpack.config.js --watch
