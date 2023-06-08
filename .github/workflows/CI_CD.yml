@@ -19,5 +19,5 @@ jobs:
         with:
           target-server: ${{ secrets.HOSTNAME }}
           remote-user: ${{ secrets.USER_NAME }}
-          private-ssh-key: ${{ secrets.SSH_KEY }}
+          private-ssh-key: ${{ secrets.PRIVATE_KEY }}
           destination-path: ${{ secrets.TARGET_DIR }}
