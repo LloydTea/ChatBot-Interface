@@ -22,7 +22,6 @@ const setpTwoError = document.getElementById("stepTwoMessage");
 const nextBtn = document.getElementById("next");
 
 const activateStep2 = () => {
-  console.log("working");
   if (email.value && name.value) {
     step1.classList.add("d-none");
     step2.classList.remove("d-none");
@@ -88,10 +87,6 @@ submitBtn.addEventListener("click", () => {
 
 nextBtn.addEventListener("click", activateStep2);
 
-// if (localStorage.getItem("sessionKey")) {
-//   startUp.show();
-// }
-
 const generateToken = () => {
   axios
     .get(`${config.BASEURl}:${config.PORT}/generate-session`)
@@ -101,7 +96,6 @@ const generateToken = () => {
 
       localStorage.setItem("sessionKey", sessionKey);
       // Store the session key on the client-side (e.g., in local storage or a cookie)
-      // ...
     })
     .catch((error) => {
       console.error("Error fetching session key:", error);
@@ -122,7 +116,7 @@ const messageHandler = async (event) => {
     userMessage(message.value);
     try {
       axios
-        .post(`${config.BASEURl}:${config.PORT}/send`, data, {
+        .post(`${config.BASEURL}:${config.PORT}/send`, data, {
           headers: {
             "Content-Type": "application/json",
           },
