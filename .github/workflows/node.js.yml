@@ -40,4 +40,3 @@ jobs:
           };
           EOF
           echo "config.js file created successfully."
-      - run: npx webpack --config webpack.config.js &&
