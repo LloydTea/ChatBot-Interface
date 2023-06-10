@@ -14,7 +14,9 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "bootstrap-icons": "^1.10.5",
-    "grunt-cli": "^1.4.3"
+    "grunt-cli": "^1.4.3",
+    "pm2": "^5.3.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",

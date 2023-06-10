@@ -102,8 +102,8 @@ const generateToken = () => {
     });
 };
 
-const messageHandler = async (event) => {
-  if (event.key === "Enter" && message.value != "") {
+const messageHandler = async () => {
+  if (message.value != "") {
     //check if local storage has sessionKey.
     if (!localStorage.getItem("sessionKey")) {
       await generateToken();
@@ -131,13 +131,19 @@ const messageHandler = async (event) => {
   }
 };
 
-message.addEventListener("keypress", messageHandler);
-sendMessageBtn.addEventListener("keypress", messageHandler);
+message.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    messageHandler();
+  }
+});
+sendMessageBtn.addEventListener("click", () => {
+  messageHandler();
+});
 
 const userMessage = (msg) => {
   chatBox.innerHTML += `
   <div class="row justify-content-end">
-      <div class="col-9 position-relative">
+      <div class="col-12 col-md-9 position-relative">
           <i class="bi bi-caret-right-fill text-primary AI_chatRightIndication_Icon"></i>
           <p class="m-2 rounded p-3 bg-primary text-white">${msg}</p>
       </div>
@@ -151,7 +157,7 @@ const AiMessage = (msg) => {
   loading.hide();
   chatBox.innerHTML += `
     <div class="row justify-content-start">
-        <div class="col-9 position-relative">
+        <div class="col-12 col-md-9 position-relative">
             <i class="bi bi-caret-left-fill text-warning AI_chatLeftIndication_Icon"></i>
             <p class="m-2 rounded p-3 bg-warning text-dark">${msg}</p>
         </div>
